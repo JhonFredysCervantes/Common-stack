@@ -129,3 +129,11 @@ Resources:
     Properties:
       SubnetId: !Ref publicSubnet
       RouteTableId: !Ref publicSubnetRouteTable
+  ## Route for the public subnet to the internet
+  publicSubnetRoute:
+    Type: AWS::EC2::Route
+    DependsOn: gatewayAttachment
+    Properties:
+      RouteTableId: !Ref publicSubnetRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref defaultIntertnetGateway
